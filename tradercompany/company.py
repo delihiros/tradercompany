@@ -60,7 +60,9 @@ class Company:
         self.observe_new_data()
 
     def add_new_data(self, dict_y):
-        self.df_y_train = self.df_y_train.append(dict_y, ignore_index=True)
+        y = pd.DataFrame(dict_y.values(), index=dict_y.keys()).T
+        self.df_y_train = pd.concat(
+            [self.df_y_train, y], ignore_index=True)
 
     def educate_fire_recruit_by_new_data(self):
         # 一番最新のデータから教育
